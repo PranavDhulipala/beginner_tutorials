@@ -61,7 +61,7 @@ int main(int argc, char **argv)
    * buffer up before throwing some away.
    */
 
-  ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
+  auto chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 
   ros::Rate loop_rate(10);
 
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
    * a unique string for each message.
    */
 
-  int count = 0;
+  auto count = 0;
   while (ros::ok())
   {
 
@@ -82,7 +82,7 @@ int main(int argc, char **argv)
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << "hello world " << count;
+    ss << " wubalubadubdub " << count;
     msg.data = ss.str();
 
 
