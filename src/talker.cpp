@@ -7,20 +7,16 @@
  *
  *
  */
+#include <sstream>
 
 #include "ros/ros.h"
 
 #include "std_msgs/String.h"
 
-
-#include <sstream>
-
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
-
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   /**
    * The ros::init() function needs to see argc and argv so that it can perform
    * any ROS arguments and name remapping that were provided at the command line.
@@ -42,7 +38,6 @@ int main(int argc, char **argv)
 
   ros::NodeHandle n;
 
-
   /**
    * The advertise() function is how you tell ROS that you want to
    * publish on a given topic name. This invokes a call to the ROS
@@ -61,10 +56,10 @@ int main(int argc, char **argv)
    * buffer up before throwing some away.
    */
 
-  ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
+  ros::Publisher chatter_pub = n.advertise < std_msgs::String
+      > ("chatter", 1000);
 
   ros::Rate loop_rate(10);
-
 
   /**
    * A count of how many messages we have sent. This is used to create
@@ -72,9 +67,7 @@ int main(int argc, char **argv)
    */
 
   int count = 0;
-  while (ros::ok())
-  {
-
+  while (ros::ok()) {
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
@@ -85,10 +78,7 @@ int main(int argc, char **argv)
     ss << " wubalubadubdub " << count;
     msg.data = ss.str();
 
-
-
     ROS_INFO("%s", msg.data.c_str());
-
 
     /**
      * The publish() function is how you send messages. The parameter
@@ -99,19 +89,13 @@ int main(int argc, char **argv)
 
     chatter_pub.publish(msg);
 
-
-
     ros::spinOnce();
-
-
 
     loop_rate.sleep();
 
     ++count;
   }
 
-
   return 0;
 }
-
 
