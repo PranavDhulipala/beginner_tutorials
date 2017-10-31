@@ -67,7 +67,7 @@ int main(int argc, char **argv)
    * away the oldest ones.
    */
 
-  auto sub = n.subscribe("chatter", 1000, chatterCallback);
+  ros::Subscriber sub = n.subscribe("chatter", 1000, chatterCallback);
 
 
   /**
