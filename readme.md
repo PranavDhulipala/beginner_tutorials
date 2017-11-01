@@ -1,6 +1,14 @@
 ## ROS BEGINNER TUTORIALS
 
-## License
+This is a repository based on ROS [tutorial](http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29) that covers how to write a publisher and subscriber node in C++.
+
+## DEPENDENCIES
+
+Ubuntu 16.04
+
+ROS kinetic is required to run these nodes and can be installed by following the instructions provided [here](http://wiki.ros.org/kinetic/Installation)
+
+## LICENSE
 
 This program is under MIT License. A copy of the license can be obtained from [here](https://github.com/PranavDhulipala/beginner_tutorials/LICENSE) 
 
