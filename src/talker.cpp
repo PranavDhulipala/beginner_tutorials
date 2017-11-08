@@ -14,7 +14,14 @@
 
 #include "std_msgs/String.h"
 #include "beginner_tutorials/service.h"
-std::string myStr = " wubalubadubdub ";
+// Base string
+std::string myStr = " wubalubadubdub ";  // NOLINT
+/**
+ *@brief Function that provides the service that changes the base string. 
+ *@param req is the request type defined in the service.srv file
+ *@param res is the response type defined in the service.srv file
+ *@return true of type boolean
+ */
 bool changeString(beginner_tutorials::service::Request &req,  // NOLINT
     beginner_tutorials::service::Response &res) {  // NOLINT
   myStr = req.str1;  // str1 is the request string in the service
@@ -67,10 +74,11 @@ int main(int argc, char **argv) {
 
   ros::Publisher chatter_pub = n.advertise < std_msgs::String
       > ("chatter", 1000);
-    ros::ServiceServer service = n.advertiseService("changeString", changeString);
 
-    int frequency;
-  frequency = atoll(argv[1]);  
+  ros::ServiceServer service = n.advertiseService("changeString", changeString);
+
+  int frequency;
+  frequency = atoll(argv[1]);  // value passed through command line
   ros::Rate loop_rate(frequency);
 
   /**
@@ -99,7 +107,6 @@ int main(int argc, char **argv) {
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
-
     std_msgs::String msg;
 
     std::stringstream ss;
