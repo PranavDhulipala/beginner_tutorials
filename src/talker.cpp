@@ -78,6 +78,22 @@ int main(int argc, char **argv) {
 
   int count = 0;
   while (ros::ok()) {
+    ROS_DEBUG_STREAM("Counted to " << count);
+    if ((count % 3) == 0) {
+      ROS_INFO_STREAM(count << " is divisible by 3. ");
+    }
+
+    if ((count % 5) == 0) {
+      ROS_WARN_STREAM(count << " is divisible by 5. ");
+    }
+
+    if ((count % 10) == 0) {
+      ROS_ERROR_STREAM(count << " is divisible by 10. ");
+    }
+
+    if ((count % 20) == 0) {
+      ROS_FATAL_STREAM(count << " is divisible by 20. ");
+    }
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
