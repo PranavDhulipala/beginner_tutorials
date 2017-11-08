@@ -69,7 +69,9 @@ int main(int argc, char **argv) {
       > ("chatter", 1000);
     ros::ServiceServer service = n.advertiseService("changeString", changeString);
 
-  ros::Rate loop_rate(10);
+    int frequency;
+  frequency = atoll(argv[1]);  
+  ros::Rate loop_rate(frequency);
 
   /**
    * A count of how many messages we have sent. This is used to create
