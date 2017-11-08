@@ -2,8 +2,14 @@ cmake_minimum_required(VERSION 2.8.3)
 project(beginner_tutorials)
 
 ## Find catkin and any catkin packages
-find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs)
+find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs message_generation)
 
+add_service_files(FILES  service.srv)
+ 
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+) 
 ## Declare a catkin package
 catkin_package()
 
