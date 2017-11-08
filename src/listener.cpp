@@ -7,9 +7,10 @@
  *
  *
  */
-
+#include <string>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "beginner_tutorials/service.h"
 
 /**
  * @brief      Callback on the chatter topic which we plan to subscribe
