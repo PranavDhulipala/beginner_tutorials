@@ -7,12 +7,21 @@
  *
  *
  */
+#include <string>
 #include <sstream>
 
 #include "ros/ros.h"
 
 #include "std_msgs/String.h"
-
+#include "beginner_tutorials/service.h"
+std::string myStr = " wubalubadubdub ";
+bool changeString(beginner_tutorials::service::Request &req,  // NOLINT
+    beginner_tutorials::service::Response &res) {  // NOLINT
+  myStr = req.str1;  // str1 is the request string in the service
+  res.str2 = myStr;  // str2 is the response string in the service
+  ROS_INFO("changed string");
+  return true;
+}
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
@@ -58,6 +67,7 @@ int main(int argc, char **argv) {
 
   ros::Publisher chatter_pub = n.advertise < std_msgs::String
       > ("chatter", 1000);
+    ros::ServiceServer service = n.advertiseService("changeString", changeString);
 
   ros::Rate loop_rate(10);
 
@@ -75,7 +85,7 @@ int main(int argc, char **argv) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << " wubalubadubdub " << count;
+    ss << myStr << " " << count;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
