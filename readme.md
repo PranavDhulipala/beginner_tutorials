@@ -73,7 +73,16 @@ rosrun beginner_tutorials listener
 
 Make sure that both talker and lister nodes are running. In a new terminal enter the command ```rosservice list``` which will output the running services, you should be able to see the ``` /changeString``` 
 
-Now run the below commands in the terminal
+
+```
+cd catkin_ws
+source devel/setup.bash
+rosservice call /changeString name
+
+```
+## USING THE LAUNCH FILE
+
+Run the below commands in the terminal
 ```
 cd catkin_ws
 source devel/setup.bash
