@@ -40,7 +40,7 @@ std::string myStr = " wubalubadubdub ";  // NOLINT
 bool changeString(beginner_tutorials::service::Request &req,  // NOLINT
     beginner_tutorials::service::Response &res) {  // NOLINT
   myStr = req.str1;  // str1 is the request string in the service
-  res.str2 = myStr;  // str2 is the response string in the service
+  res.str2 = req.str1;  // str2 is the response string in the service
   ROS_INFO("changed string");
   return true;
 }
@@ -95,10 +95,11 @@ int main(int argc, char **argv) {
 
   ros::ServiceServer service = n.advertiseService("changeString", changeString);
 
-  int frequency;
-  frequency = atoll(argv[1]);  // value passed through command line
-  ros::Rate loop_rate(frequency);
-
+  /*int frequency;
+   frequency = atoll(argv[1]);  // value passed through command line
+   ros::Rate loop_rate(frequency);
+   */
+  ros::Rate loop_rate(10);
   /**
    * A count of how many messages we have sent. This is used to create
    * a unique string for each message.
