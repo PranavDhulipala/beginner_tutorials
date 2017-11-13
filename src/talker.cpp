@@ -22,12 +22,28 @@
  *  @brief talker node
  *
  */
+#include <string>
 #include <sstream>
 
 #include "ros/ros.h"
 
 #include "std_msgs/String.h"
-
+#include "beginner_tutorials/service.h"
+// Base string
+std::string myStr = " wubalubadubdub ";  // NOLINT
+/**
+ *@brief Function that provides the service that changes the base string. 
+ *@param req is the request type defined in the service.srv file
+ *@param res is the response type defined in the service.srv file
+ *@return true of type boolean
+ */
+bool changeString(beginner_tutorials::service::Request &req,  // NOLINT
+    beginner_tutorials::service::Response &res) {  // NOLINT
+  myStr = req.str1;  // str1 is the request string in the service
+  res.str2 = myStr;  // str2 is the response string in the service
+  ROS_INFO("changed string");
+  return true;
+}
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
@@ -74,7 +90,11 @@ int main(int argc, char **argv) {
   ros::Publisher chatter_pub = n.advertise < std_msgs::String
       > ("chatter", 1000);
 
-  ros::Rate loop_rate(10);
+  ros::ServiceServer service = n.advertiseService("changeString", changeString);
+
+  int frequency;
+  frequency = atoll(argv[1]);  // value passed through command line
+  ros::Rate loop_rate(frequency);
 
   /**
    * A count of how many messages we have sent. This is used to create
@@ -83,14 +103,29 @@ int main(int argc, char **argv) {
 
   int count = 0;
   while (ros::ok()) {
+    ROS_DEBUG_STREAM("Counted to " << count);
+    if ((count % 3) == 0) {
+      ROS_INFO_STREAM(count << " is divisible by 3. ");
+    }
+
+    if ((count % 5) == 0) {
+      ROS_WARN_STREAM(count << " is divisible by 5. ");
+    }
+
+    if ((count % 10) == 0) {
+      ROS_ERROR_STREAM(count << " is divisible by 10. ");
+    }
+
+    if ((count % 20) == 0) {
+      ROS_FATAL_STREAM(count << " is divisible by 20. ");
+    }
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
-
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << " wubalubadubdub " << count;
+    ss << myStr << " " << count;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
