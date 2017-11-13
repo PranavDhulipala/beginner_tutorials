@@ -26,7 +26,7 @@
 #include <sstream>
 
 #include "ros/ros.h"
-
+#include <tf/transform_broadcaster.h>
 #include "std_msgs/String.h"
 #include "beginner_tutorials/service.h"
 // Base string
@@ -68,6 +68,9 @@ int main(int argc, char **argv) {
    */
 
   ros::NodeHandle n;
+  static tf::TransformBroadcaster br;
+  tf::Transform transform;
+  tf::Quaternion q;
 
   /**
    * The advertise() function is how you tell ROS that you want to
@@ -119,6 +122,12 @@ int main(int argc, char **argv) {
     if ((count % 20) == 0) {
       ROS_FATAL_STREAM(count << " is divisible by 20. ");
     }
+
+    transform.setOrigin(tf::Vector3(4.0, 1.0, 0.0));
+    q.setRPY(0, 0, 3.14);
+    transform.setRotation(q);
+    br.sendTransform(
+        tf::StampedTransform(transform, ros::Time::now(), "world", "talk"));
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
