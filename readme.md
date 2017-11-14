@@ -44,7 +44,7 @@ $ cd ~/catkin_ws/
 $ catkin_make
 $ source devel/setup.bash
 $ cd src/
-$ git clone -b Week10_HW https://github.com/PranavDhulipala/beginner_tutorials
+$ git clone -b Week11_HW https://github.com/PranavDhulipala/beginner_tutorials
 $ cd ..
 $ catkin_make
 ```
@@ -89,3 +89,48 @@ source devel/setup.bash
 roslaunch beginner_tutorials launch.launch frequency:=number
 ``` 
 frequency is the argument that changes the publisher's frequency and number is of type integer which is passed as a value of the argument frequency.
+
+## INSPECTING TF FRAMES
+
+Make sure the roscore and talker are running,use the below commands to print the tf transforms on screen.
+
+```
+rosrun tf tf_echo /world /talk
+```
+
+To generate a PDF relative to the frames use the below command
+```
+rosrun tf view_frames
+```
+## TESTING 
+
+From the workspace's parent folder enter one of the below commands in the terminal
+```
+catkin_make run_tests
+```
+or 
+
+```
+rostest beginner_tutorials talkerTest.launch
+```
+## USING ROSBAG
+
+Run the command below to launch the nodes and record all the topics, exit manually.
+
+```
+roslaunch beginner_tutorials launch.launch record:=true
+```
+To play back the recording enter the following commands:
+
+In a first terminal window:
+
+```
+rosrun beginner_tutorials listener
+```
+
+In a second terminal window:
+
+```
+rosbag play "rosbag file name"
+```
+The listener node now plays the previously recorded messages.

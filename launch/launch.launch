@@ -9,7 +9,7 @@
   </node>
 
   <node pkg = "rosbag" type= "record" name= "record" 
-  		args = "-a"  if="$(eval rosbag == true)" launch-prefix = "xterm -e">
+  		args = "-a "  if="$(eval rosbag == true)" launch-prefix = "xterm -e">
   </node>
 
   <node pkg="beginner_tutorials" name="listener" type="listener"
