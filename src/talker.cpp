@@ -24,9 +24,8 @@
  */
 #include <string>
 #include <sstream>
-
 #include "ros/ros.h"
-#include <tf/transform_broadcaster.h>
+#include "tf/transform_broadcaster.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/service.h"
 // Base string
@@ -68,11 +67,11 @@ int main(int argc, char **argv) {
    */
 
   ros::NodeHandle n;
-  //create the transform broadcaster
+  // create the transform broadcaster
   static tf::TransformBroadcaster br;
   // create transform object
   tf::Transform transform;
-  // create quaternion 
+  // create quaternion
   tf::Quaternion q;
 
   /**
