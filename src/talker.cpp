@@ -68,8 +68,11 @@ int main(int argc, char **argv) {
    */
 
   ros::NodeHandle n;
+  //create the transform broadcaster
   static tf::TransformBroadcaster br;
+  // create transform object
   tf::Transform transform;
+  // create quaternion 
   tf::Quaternion q;
 
   /**
@@ -95,11 +98,10 @@ int main(int argc, char **argv) {
 
   ros::ServiceServer service = n.advertiseService("changeString", changeString);
 
-  /*int frequency;
-   frequency = atoll(argv[1]);  // value passed through command line
-   ros::Rate loop_rate(frequency);
-   */
-  ros::Rate loop_rate(10);
+  int frequency;
+  frequency = atoll(argv[1]);  // value passed through command line
+  ros::Rate loop_rate(frequency);
+
   /**
    * A count of how many messages we have sent. This is used to create
    * a unique string for each message.
@@ -107,6 +109,7 @@ int main(int argc, char **argv) {
 
   int count = 0;
   while (ros::ok()) {
+    // streams
     ROS_DEBUG_STREAM("Counted to " << count);
     if ((count % 3) == 0) {
       ROS_INFO_STREAM(count << " is divisible by 3. ");
@@ -123,10 +126,12 @@ int main(int argc, char **argv) {
     if ((count % 20) == 0) {
       ROS_FATAL_STREAM(count << " is divisible by 20. ");
     }
-
+    // set origin
     transform.setOrigin(tf::Vector3(4.0, 1.0, 0.0));
+    // set orientation
     q.setRPY(0, 0, 3.14);
     transform.setRotation(q);
+    // broadcast transform
     br.sendTransform(
         tf::StampedTransform(transform, ros::Time::now(), "world", "talk"));
     /**
