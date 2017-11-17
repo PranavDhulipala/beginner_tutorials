@@ -118,7 +118,7 @@ rostest beginner_tutorials talkerTest.launch
 Run the command below to launch the nodes and record all the topics, exit manually.
 
 ```
-roslaunch beginner_tutorials launch.launch record:=true
+roslaunch beginner_tutorials launch.launch rosbag:=true
 ```
 To play back the recording enter the following commands:
 
