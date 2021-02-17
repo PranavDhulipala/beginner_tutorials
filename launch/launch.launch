@@ -7,8 +7,8 @@
 	 args= "$(arg frequency)" output= "screen">
   </node>
 
-  <node pkg="beginner_tutorials" name="listener" type="listener"
+  <!--<node pkg="beginner_tutorials" name="listener" type="listener"
 	launch-prefix = "gnome-terminal --command" output= "screen">
-  </node>
+  </node>-->
 
 </launch>
